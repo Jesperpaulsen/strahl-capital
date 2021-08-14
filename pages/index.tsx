@@ -9,33 +9,31 @@ import { getAllPostsForHome } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
 import SanityPageService from '../services/SanityPageService'
+import HomePage from '../types/HomePage'
 
-const query = `*[_type == 'home']`
+const query = `*[_type == 'home'][0]`
 
-const pageService = new SanityPageService(query)
+const pageService = new SanityPageService<HomePage>(query)
 
-const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ allPosts, preview }) => {
-  const heroPost = allPosts[0]
-  const morePosts = allPosts.slice(1)
+const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
+
+  const { data } = pageService.getPreviewHook(context)()
+
+  const { preview } = data
+
   return (
     <>
       <Layout preview={preview}>
         <Head>
           <title>Next.js Blog Example with {CMS_NAME}</title>
         </Head>
+        <div>
+          {data.title}
+        </div>
         <Container>
-          <Intro />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+          <div>
+
+          </div>
         </Container>
       </Layout>
     </>
@@ -44,10 +42,6 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ allPo
 
 export default Index
 
-export async function getStaticProps({ preview = false }) {
-  const allPosts = await getAllPostsForHome(preview)
-  return {
-    props: { allPosts, preview },
-    revalidate: 1
-  }
+export function getStaticProps(context) {
+  return pageService.fetchQuery(context)
 }

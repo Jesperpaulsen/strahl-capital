@@ -1,8 +1,29 @@
-import { getPreviewPostBySlug } from '../../lib/api'
+import sanity from '../../services/sanity'
 
-export default async function preview(req, res) {
-  // Check the secret and next parameters
-  // This secret should only be known to this API route and the CMS
+const checkIfAuthorized = async (slug) => {
+  if (slug === '/') return true
+  const parts = slug.split('/')
+  // console.log(parts)
+  if (parts.length === 2 && checkIfSlugIsKnown(parts[1])) return true
+  if (parts.length === 3 && checkIfSlugIsKnown(parts[1])) {
+    const exists = await checkIfPreviewSlugExists(parts[2])
+    return exists
+  }
+  return false
+}
+
+const checkIfSlugIsKnown = (slug) => {
+  const globalSlugs = [
+  ]
+  return globalSlugs.includes(slug)
+}
+
+const checkIfPreviewSlugExists = (slug) => {
+  sanity.setPreviewMode(true)
+  return sanity.checkIfSlugExists(slug)
+}
+
+const preview = async (req, res) => {
   if (
     req.query.secret !== process.env.SANITY_PREVIEW_SECRET ||
     !req.query.slug
@@ -10,19 +31,14 @@ export default async function preview(req, res) {
     return res.status(401).json({ message: 'Invalid token' })
   }
 
-  // Fetch the headless CMS to check if the provided `slug` exists
-  const post = await getPreviewPostBySlug(req.query.slug)
-
-  // If the slug doesn't exist prevent preview mode from being enabled
-  if (!post) {
-    return res.status(401).json({ message: 'Invalid slug' })
-  }
+  // We check here to prevent the preview mode from being missused / open redirect vulnerabilities
+  const isAuthorized = await checkIfAuthorized(req.query.slug)
+  if (!isAuthorized) return res.status(401).json({ message: 'Invalid slug' })
 
   // Enable Preview Mode by setting the cookies
   res.setPreviewData({})
-
-  // Redirect to the path from the fetched post
-  // We don't redirect to req.query.slug as that might lead to open redirect vulnerabilities
-  res.writeHead(307, { Location: `/posts/${post.slug}` })
+  res.writeHead(307, { Location: req.query.slug })
   res.end()
 }
+
+export default preview

@@ -5649,6 +5649,11 @@ same-origin@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/same-origin/-/same-origin-0.1.1.tgz#c2287d3192577df517acbbd6d1451a9c3c3914f5"
 
+sanity-mobile-preview@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/sanity-mobile-preview/-/sanity-mobile-preview-1.0.8.tgz#79608cc423414da956a7b6d53f46b6bdb202f6f9"
+  integrity sha512-GcUk6V9V+TLb8Gr2xXcQizLPlgwdH01oSTGnoU0pyg4A618UI+3HFdA03pd5T3s32Ppj7Vqkso4o8dC8JaZf5w==
+
 scheduler@^0.20.2:
   version "0.20.2"
   resolved "https://registry.npmjs.org/scheduler/-/scheduler-0.20.2.tgz#4baee39436e34aa93b4874bddcbf0fe8b8b50e91"
