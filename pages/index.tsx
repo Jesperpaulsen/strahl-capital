@@ -8,6 +8,11 @@ import Layout from '../components/layout'
 import { getAllPostsForHome } from '../lib/api'
 import Head from 'next/head'
 import { CMS_NAME } from '../lib/constants'
+import SanityPageService from '../services/SanityPageService'
+
+const query = `*[_type == 'home']`
+
+const pageService = new SanityPageService(query)
 
 const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ allPosts, preview }) => {
   const heroPost = allPosts[0]
@@ -36,6 +41,8 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = ({ allPo
     </>
   )
 }
+
+export default Index
 
 export async function getStaticProps({ preview = false }) {
   const allPosts = await getAllPostsForHome(preview)
