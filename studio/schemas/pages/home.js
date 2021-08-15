@@ -14,9 +14,9 @@ export default {
       title: 'Hero Image'
     },
     {
-      name: 'imageText',
-      type: 'string',
-      title: 'Image text'
+      name: 'subTitle',
+      type: 'blockContent',
+      title: 'Subtitle'
     },
     {
       name: 'body',

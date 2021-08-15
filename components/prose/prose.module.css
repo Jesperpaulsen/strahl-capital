@@ -1,0 +1,132 @@
+.prose {
+  /* Apply a overwriteable max width */
+  @apply max-w-3xl;
+
+  /* Margin Defaults */
+  & * + * {
+    @apply mt-5 md:mt-8;
+  }
+
+  & hr {
+    @apply border-b border-gray-100 border-t-0;
+  }
+
+  & * + button {
+    @apply mt-0;
+  }
+
+  & p + p {
+    @apply mt-4 md:mt-6;
+  }
+
+  & li + li {
+    @apply mt-4;
+  }
+
+  /* Common Elements Sizing/Colors */
+  & p,
+  & ul,
+  & ol {
+    @apply text-sm md:text-base text-gray-600;
+  }
+
+  & p > a {
+    @apply underline hover:text-gray-900 focus:text-gray-900;
+  }
+
+  & ul {
+    & li {
+      @apply relative pl-5;
+    }
+  }
+
+  & ul li::before {
+    content: " ";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    margin-top: 8px;
+
+    @apply bg-gray-700;
+  }
+
+  & ol {
+    @apply list-inside list-decimal;
+  }
+
+  & img,
+  & figure {
+    @apply mt-6 md:mt-8;
+  }
+
+  /* Used for Next/Img element due to inline margin styling */
+  & div {
+    @apply mt-6 md:mt-8 !important;
+  }
+
+  & div:first-of-type {
+    @apply mt-0 md:mt-0 !important;
+  }
+
+  /* Override accordion margins when in prose */
+  & details {
+    @apply mt-0 !important;
+
+    & p {
+      @apply mt-2 mb-4 !important;
+    }
+
+    & * + * {
+      @apply mt-0 !important;
+    }
+  }
+
+  & strong {
+    @apply text-black font-medium text-opacity-100;
+  }
+
+  & blockquote {
+    @apply bg-gray-50 rounded-md p-6;
+  }
+
+  & cite {
+    @apply not-italic text-sm mt-3 block font-medium;
+  }
+
+  /* Headings */
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    @apply uppercase text-gray-800;
+  }
+
+  & * + h2,
+  & * + h3,
+  & * + h4 {
+    @apply mt-8;
+  }
+
+  & h4 + * {
+    @apply mt-4;
+  }
+
+  & h1 {
+    @apply text-heading-md md:text-heading-lg xl:text-heading-xl;
+  }
+
+  & h2 {
+    @apply text-heading-sm md:text-heading-md xl:text-heading-lg;
+  }
+
+  & h3 {
+    @apply text-heading-xs md:text-heading-sm xl:text-heading-md;
+  }
+
+  & h4 {
+    @apply text-heading-xs md:text-heading-sm font-medium;
+  }
+}

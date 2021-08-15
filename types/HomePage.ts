@@ -4,7 +4,7 @@ import DefaultImage from './DefaultImage';
 interface HomePage extends SanityDocument {
   title: string,
   heroImage: DefaultImage
-  imageText: string,
+  subTitle: Block[],
   body: Block[]
 }
 

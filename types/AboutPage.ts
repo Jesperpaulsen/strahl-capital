@@ -6,6 +6,6 @@ import { SanityDocument } from "@sanity/types";
 export default interface AboutPage extends SanityDocument {
   title: string,
   heroImage: DefaultImage
-  imageText: string,
+  subTitle: Block[],
   body: Block[]
 }

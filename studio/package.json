@@ -1,10 +1,10 @@
 {
-  "name": "mysanityproject",
+  "name": "strahl-capital",
   "private": true,
   "version": "1.0.0",
   "description": "",
   "main": "package.json",
-  "author": "Knut Melvær <knut@sanity.io>",
+  "author": "Jesper Paulsen <jesper@jesper.no>",
   "license": "UNLICENSED",
   "keywords": [
     "sanity"

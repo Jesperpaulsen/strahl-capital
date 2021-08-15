@@ -1,7 +1,37 @@
 module.exports = {
   theme: {
+    fontSize: {
+      // Heading Sizes
+      'heading-xs': ['1rem', '1.125rem'],
+      'heading-sm': ['1.125rem', '1.175rem'],
+      'heading-md': ['1.25rem', '1.5rem'],
+      'heading-lg': ['1.5rem', '1.5rem'],
+      'heading-xl': ['1.875rem', '1.875rem'],
+      'heading-2xl': ['2.25rem', '2.25rem'],
+      'heading-3xl': ['3rem', '3rem'],
+      // Text Sizes
+      '2xs': ['0.6rem', '1rem'],
+      xs: ['0.75rem', '1rem'],
+      sm: ['0.875rem', '1.375rem'],
+      base: ['1rem', '1.5rem'],
+      lg: ['1.125rem', '1.75rem'],
+      xl: ['1.25rem', '1.75rem'],
+      '2xl': ['1.5rem', '2rem'],
+      '3xl': ['1.875rem', '2.25rem']
+    },
     extend: {
       colors: {
+        green: {
+          100: '#ECFDF5',
+          200: '#D1FAE5',
+          300: '#6EE7B7',
+          400: '#34D399',
+          500: '#004550',
+          600: '#059669',
+          700: '#047857',
+          800: '#065F46',
+          900: '#064E3B'
+        },
         'accent-1': '#FAFAFA',
         'accent-2': '#EAEAEA',
         'accent-7': '#333',
