@@ -1,4 +1,16 @@
 module.exports = {
+  purge: {
+    // enabled: true,
+    content: [
+      './pages/**/*.{js,jsx,tsx}',
+      './pages/**/[*].{js,jsx,tsx}',
+      './components/**/*.{js,jsx,tsx}',
+      './components/**/**/*.{js,jsx,tsx}'
+    ],
+    options: {
+      safelist: ['prose']
+    }
+  },
   theme: {
     fontSize: {
       // Heading Sizes

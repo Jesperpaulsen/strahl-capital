@@ -1,5 +1,4 @@
 import React from 'react'
-import Alert from '../alert'
 import Footer from '../footer'
 import Header from '../header/header'
 import Meta from '../meta'

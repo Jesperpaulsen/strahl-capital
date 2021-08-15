@@ -18,7 +18,6 @@ export default function PostHeader({ title, coverImage, date, author }) {
           <Avatar name={author?.name} picture={author?.picture} />
         </div>
         <div className="mb-6 text-lg">
-          <Date dateString={date} />
         </div>
       </div>
     </>
