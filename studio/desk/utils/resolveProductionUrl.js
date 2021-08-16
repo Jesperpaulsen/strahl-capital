@@ -1,11 +1,16 @@
 const globalSlugs = {
   home: '/',
+  about: '/about',
+  investments: '/investments',
+  investment: '/investements',
+  news: '/news',
+  newsArticle: '/news'
 }
 
 export const getGlobalSlug = (slug) => globalSlugs[slug]
 
 // TODO: Change remote url
-const remoteURL = ''
+const remoteURL = 'strahl-capital.vercel.app'
 const localURL = 'http://localhost:3000'
 export const previewURL = window.location.hostname === 'localhost' ? localURL : remoteURL
 

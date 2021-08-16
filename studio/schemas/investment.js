@@ -31,13 +31,15 @@ export default {
     },
     {
       name: 'location',
-      type: 'location',
-      title: 'Location'
+      type: 'reference',
+      title: 'Location',
+      to: [{ type: 'location' }]
     },
     {
       name: 'category',
-      type: 'investmentCategory',
-      title: 'Category'
+      title: 'Category',
+      type: 'reference',
+      to: [{ type: 'investmentCategory' }]
     },
     {
       name: 'shortDescription',
