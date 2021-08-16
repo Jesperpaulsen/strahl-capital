@@ -25,6 +25,7 @@ const IframePreview = props => {
   }
 
   const url = createUrl({ globalSlug: options.globalSlug, slug: displayed.slug })
+  console.log(url)
 
   if (!url) {
     return (

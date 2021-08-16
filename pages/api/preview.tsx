@@ -13,7 +13,13 @@ const checkIfAuthorized = async (slug) => {
 }
 
 const checkIfSlugIsKnown = (slug) => {
+  console.log(slug)
   const globalSlugs = [
+    'about',
+    'investments',
+    'investements',
+    'news',
+    'news'
   ]
   return globalSlugs.includes(slug)
 }
