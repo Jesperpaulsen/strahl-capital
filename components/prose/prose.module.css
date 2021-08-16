@@ -130,3 +130,46 @@
     @apply text-heading-xs md:text-heading-sm font-medium;
   }
 }
+
+.prose--large {
+  & p,
+  & ul,
+  & ol {
+    @apply text-sm md:text-base xl:text-lg;
+  }
+
+  & h1 {
+    @apply text-heading-xl md:text-heading-2xl xl:text-heading-3xl;
+  }
+
+  & h2 {
+    @apply text-heading-lg md:text-heading-xl xl:text-heading-2xl;
+  }
+
+  & h3 {
+    @apply text-heading-md md:text-heading-lg xl:text-heading-xl;
+  }
+}
+
+.prose--white {
+  & h1,
+  & h2,
+  & h3,
+  & h4 {
+    @apply text-white;
+  }
+
+  & p,
+  & ul,
+  & ol {
+    @apply text-gray-200;
+  }
+
+  & blockquote {
+    @apply bg-white bg-opacity-5;
+  }
+
+  & strong {
+    @apply text-white;
+  }
+}

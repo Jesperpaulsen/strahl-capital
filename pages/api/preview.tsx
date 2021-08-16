@@ -13,7 +13,6 @@ const checkIfAuthorized = async (slug) => {
 }
 
 const checkIfSlugIsKnown = (slug) => {
-  console.log(slug)
   const globalSlugs = [
     'about',
     'investments',

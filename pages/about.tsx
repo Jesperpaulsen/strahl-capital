@@ -23,10 +23,10 @@ const About: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         <title>{data.title}</title>
       </Head>
       <div className="relative">
-        <ImageWrapper image={data.heroImage} height={700} />
+        <ImageWrapper image={data.heroImage} height={500} />
         <div className="bg-gradient-to-t from-gray-900 top-0 w-full h-full absolute"/>
         <div className="text-center top-1/2 absolute md:flex md:flex-col md:items-center">
-          <div className="text-3xl w-screen text-gray-200 md:w-1/2">
+          <div className="text-3xl md:text-6xl xl:text-7xl md:leading-tight font-semibold w-screen text-gray-200">
             {data.title}
           </div>
           <div className="text-gray-300 w-full md:w-1/2 hidden md:block">
@@ -35,7 +35,7 @@ const About: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         </div>
       </div>
       <Container>
-        <div className="flex justify-center">
+        <div className="flex justify-center pt-5">
           <Prose>
             <BlockContentWrapper text={data.body} />
           </Prose>
