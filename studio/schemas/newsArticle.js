@@ -16,7 +16,6 @@ export default {
       options: {
         source: 'title',
         maxLength: 96,
-        slugify: title => slugify(title)
       }
     },
     {

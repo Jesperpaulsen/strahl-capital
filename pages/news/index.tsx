@@ -8,25 +8,25 @@ import Prose from '../../components/prose/prose'
 import SanityPageService from '../../services/SanityPageService'
 import AboutPage from '../../types/AboutPage'
 import InvestmentsPage from '../../types/InvestmentsPage'
+import NewsPage from '../../types/NewsPage'
 
-const query = `*[_type == "investments"][0] {
-  ...,
-  "investmentPerCategory": *[_type == "investmentCategory"] | order(_updatedAt desc) {
-    ...,
-    "investments": *[_type == "investment" && references(^._id)] | order(title) {
-      title,
-      "subtitle": location->title,
-      "image": logo,
-      "href": url
-    }
+const query = `*[_type == "news"][0] {
+  title,
+  description,
+  "news": *[_type == "newsArticle"] | order(_createdAt desc) {
+    title,
+    "subtitle": _createdAt,
+    image,
+    "href": slug.current
   }
 }`
 
-const pageService = new SanityPageService<InvestmentsPage>(query)
+const pageService = new SanityPageService<NewsPage>(query)
 
-const Investments: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
+const News: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
   const { data } = pageService.getPreviewHook(context)()
 
+  console.log(data)
   const [filter, setFilter] = useState('')
 
   return (
@@ -43,13 +43,10 @@ const Investments: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (c
             <BlockContentWrapper text={data.description} />
           </Prose>
           <div className="w-full max-w-5xl">
-            {data.investmentPerCategory.map((investment, i) => (
-              <Grid
-                items={investment.investments}
-                key={`investment-grid-${i}`}
-                title={investment.title}
-              />
-            ))}
+            <Grid
+              slugPrefix='/news'
+              items={data.news}
+            />
           </div>
         </Container>
       </div>
@@ -57,8 +54,9 @@ const Investments: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (c
   )
 }
 
-export default Investments
+export default News
 
 export function getStaticProps(context) {
   return pageService.fetchQuery(context)
 }
+

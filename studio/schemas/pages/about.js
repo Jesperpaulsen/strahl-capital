@@ -14,11 +14,6 @@ export default {
       title: 'Hero Image'
     },
     {
-      name: 'subTitle',
-      type: 'blockContent',
-      title: 'Subtitle'
-    },
-    {
       name: 'body',
       type: 'blockContent',
       title: 'Body'

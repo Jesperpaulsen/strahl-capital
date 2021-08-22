@@ -17,7 +17,7 @@ const Layout: React.FC<LayoutProps> = ({ preview, children }) => {
           {preview && <PreviewWarning />}
           <Header />
         </div>
-        <div className="min-h-screen">
+        <div className="min-h-screen w-screen">
           <main>{children}</main>
         </div>
       <Footer />

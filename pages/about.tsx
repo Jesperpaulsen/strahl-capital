@@ -20,17 +20,16 @@ const About: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
   return (
     <>
       <Head>
-        <title>{data.title}</title>
+        <title>{data.title} | Strahl Capital</title>
       </Head>
       <div className="relative">
         <ImageWrapper image={data.heroImage} height={500} />
         <div className="bg-gradient-to-t from-gray-900 top-0 w-full h-full absolute"/>
-        <div className="text-center top-1/2 absolute md:flex md:flex-col md:items-center">
-          <div className="text-3xl md:text-6xl xl:text-7xl md:leading-tight font-semibold w-screen text-gray-200">
-            {data.title}
-          </div>
-          <div className="text-gray-300 w-full md:w-1/2 hidden md:block">
-            <BlockContentWrapper text={data.subTitle} />
+        <div className="top-1/2 absolute w-full z-10">
+          <div className="w-full flex justify-center">
+            <div className="text-3xl md:text-5xl xl:text-6xl md:leading-tight max-w-4xl text-center font-semibold text-gray-200">
+                {data.title}
+              </div>
           </div>
         </div>
       </div>

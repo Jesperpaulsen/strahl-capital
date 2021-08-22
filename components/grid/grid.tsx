@@ -3,7 +3,8 @@ import DefaultImage from '../../types/DefaultImage'
 import Card from '../card/card'
 
 interface GridProps {
-  title: string
+  slugPrefix?: string
+  title?: string
   items: {
     title: string,
     subtitle: string,
@@ -30,14 +31,14 @@ for (let i = 0; i < 50; i++) {
   })
 }*/
 
-const Grid: React.FC<GridProps> = ({ items, title }) => {
+const Grid: React.FC<GridProps> = ({ items, title, slugPrefix }) => {
   return <div className="w-full">
-    <div className="text-heading-xl pt-10">
+    {title && <div className="text-heading-xl pt-10">
       {title.toUpperCase()}
-    </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full pt-4">
+    </div>}
+      <div className="grid grid-cols-2 xl:grid-cols-4 gap-5 pt-4">
         {items.map((item, i) => (
-          <Card key={`card-${i}`} {...item} />
+          <Card key={`card-${i}`} {...item} slugPrefix={slugPrefix} />
         ))}
       </div>
   </div> 

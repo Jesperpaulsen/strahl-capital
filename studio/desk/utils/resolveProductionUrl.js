@@ -25,6 +25,6 @@ export const createUrl = ({ slug, globalSlug }) => {
 }
 
 export default function resolveProductionUrl (document) {
-  const url = createUrl({ globalSlug: getGlobalSlug(document._type), slug: document.slug })
+  const url = createUrl({ globalSlug: getGlobalSlug(document._type), slug: document._type === 'investment' ? undefined : document.slug })
   return url
 }

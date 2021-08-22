@@ -9,7 +9,10 @@ import ImageWrapper from '../components/imageWrapper/imageWrapper'
 import BlockContentWrapper from '../components/blockContentWrapper/blockContentWrapper'
 import Prose from '../components/prose/prose'
 
-const query = `*[_type == 'home'][0]`
+const query = `*[_type == 'home'][0] {
+  ...,
+  "latestInvestments": *[_type == "investments"] | order(_updatedAt desc) [0 ... 5]
+}`
 
 const pageService = new SanityPageService<HomePage>(query)
 
@@ -23,12 +26,19 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         <title>{data.title}</title>
       </Head>
       <div className="block lg:hidden">
-        <div className="relative w-screen">
-          <ImageWrapper image={data.heroImage} />
-          <div className="bg-gradient-to-t from-gray-900 top-0 w-full h-full absolute"/>
-          <div className="text-3xl md:text-5xl text-center text-gray-200 absolute top-1/2 w-full px-2">
+        <div className="w-full">
+          <div className="h-52 relative">
+            <ImageWrapper image={data.heroImage} layout="fill" objectFit="cover" />
+            <div className="bg-gradient-to-t from-gray-900 top-0 w-full h-full absolute"/>
+            <div className="text-3xl md:text-5xl text-center w-full pt-4 absolute top-1/2 text-white">
               {data.title}
+            </div>
           </div>
+            <Container>
+              <div className="text-xl font-light text-center">
+                <BlockContentWrapper text={data.subTitle} />
+              </div>
+            </Container>
         </div>
       </div>
       <Container bleedMobile>
@@ -52,6 +62,9 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         <Prose>
           <BlockContentWrapper text={data.body} />
         </Prose>
+      </div>
+      <div>
+        
       </div>
     </>
   )
