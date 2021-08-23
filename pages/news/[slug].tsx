@@ -22,9 +22,9 @@ const NewsArticle: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (c
         <title>{data.title} | Strahl Capital</title>
       </Head>
       <div className="relative">
-        <div className="h-80">
+        {data.image?.asset && <div className="h-80">
           <ImageWrapper image={data.image} height={500} layout="fill" objectFit="cover" />
-        </div>
+        </div>}
         <div className="bg-gradient-to-t from-gray-900 top-0 w-full h-full absolute"/>
         <div className="top-1/2 absolute w-full z-10">
           <div className="w-full flex justify-center">
