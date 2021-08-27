@@ -27,7 +27,7 @@ const About: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         <div className="bg-gradient-to-t from-gray-900 top-0 w-full h-full absolute"/>
         <div className="top-1/2 absolute w-full z-10">
           <div className="w-full flex justify-center">
-            <div className="text-3xl md:text-5xl xl:text-6xl md:leading-tight max-w-4xl text-center font-semibold text-gray-200">
+            <div className="text-1xl md:text-5xl xl:text-6xl md:leading-tight max-w-4xl text-center font-semibold text-gray-200">
                 {data.title}
               </div>
           </div>

@@ -8,10 +8,15 @@ import HomePage from '../types/HomePage'
 import ImageWrapper from '../components/imageWrapper/imageWrapper'
 import BlockContentWrapper from '../components/blockContentWrapper/blockContentWrapper'
 import Prose from '../components/prose/prose'
+import Card from '../components/card/card'
 
 const query = `*[_type == 'home'][0] {
   ...,
-  "latestInvestments": *[_type == "investments"] | order(_updatedAt desc) [0 ... 5]
+  "investments": *[_type == "investment"] | order(_updatedAt desc) [0 ... 5],
+  "news": *[_type == "newsArticle"] | order(_createdAt desc) [0 ... 5] {
+    ...,
+    "href": slug.current
+  }
 }`
 
 const pageService = new SanityPageService<HomePage>(query)
@@ -19,7 +24,7 @@ const pageService = new SanityPageService<HomePage>(query)
 const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
 
   const { data } = pageService.getPreviewHook(context)()
-
+  console.log(data)
   return (
     <>
       <Head>
@@ -42,8 +47,8 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         </div>
       </div>
       <Container bleedMobile>
-      <div className="hidden lg:block h-screen">
-        <div className="flex w-full h-5/6 md:justify-between items-center flex-wrap">
+      <div className="hidden lg:block">
+        <div className="flex w-full h-4/6 md:justify-between items-center flex-wrap py-32">
           <div className="w-5/12">
             <div className="text-3xl md:text-6xl xl:text-7xl md:leading-tight font-semibold text-center md:text-left">
               {data.title}
@@ -63,9 +68,49 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
           <BlockContentWrapper text={data.body} />
         </Prose>
       </div>
+      <Container>
       <div>
-        
+        <div className="text-2xl md:text-3xl py-4">
+          Latest news from Strahl Capital
+        </div>
+        <div className="flex flex-wrap justify-between">
+          {data.news.map((news) => (
+            <div
+              key={news.title}
+            >
+            <Card
+              large
+              href={news.href}
+              image={news.image}
+              title={news.title}
+              slugPrefix="/news"
+              subtitle={news.subtitle}
+            />
+            </div>
+          ))}
+        </div>
       </div>
+      <div className="pt-8">
+        <div className="text-2xl md:text-3xl py-4">
+          Some of our investements
+        </div>
+        <div className="flex flex-wrap justify-between">
+          {data.investments.map((investement) => (
+            <div
+              className="p-2"
+              key={investement.title}
+            >
+              <Card
+                href={investement.href}
+                image={investement.logo}
+                title={investement.title}
+                subtitle={investement.subtitle}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+      </Container>
     </>
   )
 }
