@@ -44,6 +44,7 @@ const News: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context)
           </Prose>
           <div className="w-full max-w-5xl">
             <Grid
+              large
               slugPrefix='/news'
               items={data.news}
             />

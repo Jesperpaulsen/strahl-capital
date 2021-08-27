@@ -28,6 +28,7 @@ const Investments: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (c
   const { data } = pageService.getPreviewHook(context)()
 
   const [filter, setFilter] = useState('')
+  console.log(data)
 
   return (
     <>
@@ -48,6 +49,7 @@ const Investments: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (c
                 items={investment.investments}
                 key={`investment-grid-${i}`}
                 title={investment.title}
+                slugPrefix="/investments"
               />
             ))}
           </div>

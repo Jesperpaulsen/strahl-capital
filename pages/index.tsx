@@ -71,7 +71,7 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
       <Container>
       <div>
         <div className="text-2xl md:text-3xl py-4">
-          Latest news from Strahl Capital
+          Latest news
         </div>
         <div className="flex flex-wrap justify-between">
           {data.news.map((news) => (
