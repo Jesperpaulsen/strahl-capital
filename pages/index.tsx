@@ -24,7 +24,6 @@ const pageService = new SanityPageService<HomePage>(query)
 const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
 
   const { data } = pageService.getPreviewHook(context)()
-  console.log(data)
   return (
     <>
       <Head>

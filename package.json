@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next",
     "build": "npm run build:sanity && pwd && npm run build:web",
+    "postbuild": "next-sitemap",
     "build:web": "next build",
     "start:web": "next start",
     "build:sanity": "cd studio && sanity build ../public/studio -y && cd ..",
@@ -36,6 +37,7 @@
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.0",
     "lerna": "^4.0.0",
+    "next-sitemap": "^1.6.164",
     "postcss": "^8.2.8",
     "postcss-flexbugs-fixes": "^4.2.1",
     "postcss-import": "^12.0.1",

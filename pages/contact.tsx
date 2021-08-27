@@ -52,9 +52,9 @@ const Contact: React.FC = () => {
           <div className="text-2xl flex justify-center pt-10">
             Get in touch
           </div>
-          <div className="flex justify-center">
+          {/*<div className="flex justify-center">
             Use the form below or send us an email at &nbsp;<a href="mailto:luisp@eunet.no">luisp@eunet.no</a>
-          </div>
+  </div>*/}
           <div className="flex justify-center">
             {success ? <div className="text-sm text-green-600 text-center">{success}</div> : <form className="max-w-lg w-96">
                 <div className="flex-row items-center">
