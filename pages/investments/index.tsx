@@ -49,7 +49,6 @@ const Investments: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (c
                 items={investment.investments}
                 key={`investment-grid-${i}`}
                 title={investment.title}
-                slugPrefix="/investments"
               />
             ))}
           </div>
