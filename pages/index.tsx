@@ -12,7 +12,8 @@ import Card from '../components/card/card'
 
 const query = `*[_type == 'home'][0] {
   ...,
-  "investments": *[_type == "investment"] | order(_updatedAt desc) [0 ... 5],
+  "numberOfInvestments": count(*[_type == "investment"]),
+  "investments": *[_type == "investment"] | order(_updatedAt desc),
   "news": *[_type == "newsArticle"] | order(_createdAt desc) [0 ... 5] {
     ...,
     "href": slug.current
@@ -24,6 +25,10 @@ const pageService = new SanityPageService<HomePage>(query)
 const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
 
   const { data } = pageService.getPreviewHook(context)()
+
+  const randomInvestmentStart = Math.floor(Math.random() * (data.numberOfInvestments - 5))
+  const investmentsToShow = data.investments.slice(randomInvestmentStart, randomInvestmentStart + 5)
+
   return (
     <>
       <Head>
@@ -94,7 +99,7 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
           Some of our investements
         </div>
         <div className="flex flex-wrap justify-between">
-          {data.investments.map((investement) => (
+          {investmentsToShow.map((investement) => (
             <div
               className="p-2"
               key={investement.title}

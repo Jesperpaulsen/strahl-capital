@@ -12,6 +12,7 @@ interface HomePage extends SanityDocument {
     image: DefaultImage,
     href: string
   }[],
+  numberOfInvestments: number,
   investments: { 
     title: string,
     subtitle: string,
