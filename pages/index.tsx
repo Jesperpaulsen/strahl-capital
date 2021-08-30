@@ -28,7 +28,7 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
 
   const randomInvestmentStart = Math.floor(Math.random() * (data.numberOfInvestments - 5))
   const investmentsToShow = data.investments.slice(randomInvestmentStart, randomInvestmentStart + 5)
-
+  console.log(investmentsToShow)
   return (
     <>
       <Head>
@@ -96,7 +96,7 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
       </div>
       <div className="pt-8">
         <div className="text-2xl md:text-3xl py-4">
-          Some of our investements
+          Some of our investments
         </div>
         <div className="flex flex-wrap justify-between">
           {investmentsToShow.map((investement) => (
