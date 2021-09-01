@@ -25,6 +25,7 @@ const Card: React.FC<CardProps> = ({ image, title, subtitle, href, slugPrefix, l
       href={url}
       target={target}
       rel="noreferrer"
+      className="min-w-full"
     >
       {large ?
         <div className="shadow-md rounded w-80 h-96 relative hover:shadow-2xl transition-shadow ease-in-out duration-300 cursor-pointer">

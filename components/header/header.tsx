@@ -24,8 +24,8 @@ const menus = [
 const Header: React.FC = () => {
   const router = useRouter()
   return (
-    <div className="h-20 w-full flex flex-wrap justify-between items-center px-4 md:px-20 pt-2 md:pt-8 whitespace-nowrap">
-      <div className="md:text-3xl text-lg w-min md:w-1/2">
+    <div className="h-28 md:h-20 w-full flex flex-wrap justify-between items-center px-4 md:px-20 pt-2 md:pt-8 whitespace-nowrap">
+      <div className="md:text-3xl text-lg w-min md:w-1/2 flex justify-start">
         <div className={`${router.asPath === '/' ? 'bg-green-400' : 'hover:text-green-900'} pr-2 pl-1 pb-0 pt-1 w-min`}>
           <Link href="/">
             Strahl Capital

@@ -77,9 +77,10 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         <div className="text-2xl md:text-3xl py-4">
           Latest news
         </div>
-        <div className="flex flex-wrap justify-between">
+        <div className="flex flex-wrap justify-start">
           {data.news.map((news) => (
             <div
+            className="px-0 md:px-5 py-2"
               key={news.title}
             >
             <Card
@@ -98,7 +99,7 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         <div className="text-2xl md:text-3xl py-4">
           Some of our investments
         </div>
-        <div className="flex flex-wrap justify-between">
+        <div className="flex flex-wrap justify-start">
           {investmentsToShow.map((investement) => (
             <div
               className="p-2"
