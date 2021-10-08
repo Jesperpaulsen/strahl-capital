@@ -21,7 +21,7 @@
     "next": "^11.1.0",
     "next-sanity": "^0.1.5",
     "next-sanity-image": "^3.1.5",
-    "next-seo": "^4.26.0",
+    "next-seo": "^4.28.1",
     "nodemailer": "^6.6.3",
     "react": "^17.0.2",
     "react-carbonbadge": "^1.0.1",

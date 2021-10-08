@@ -26,9 +26,6 @@ const pageService = new SanityPageService<NewsPage>(query)
 const News: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
   const { data } = pageService.getPreviewHook(context)()
 
-  console.log(data)
-  const [filter, setFilter] = useState('')
-
   return (
     <>
       <Head>
