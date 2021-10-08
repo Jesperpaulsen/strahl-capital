@@ -21,7 +21,7 @@ const Card: React.FC<CardProps> = ({ image, title, subtitle, href, slugPrefix, l
 
   return(
     <Link
-      href={url}
+      href={url || ''}
       passHref
     >
       <a

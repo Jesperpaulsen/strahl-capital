@@ -13,10 +13,7 @@ import Card from '../components/card/card'
 const query = `*[_type == 'home'][0] {
   ...,
   "numberOfInvestments": count(*[_type == "investment"]),
-  "investments": *[_type == "investment"] | order(_updatedAt desc) {
-    ...,
-    "href": slug.current
-  },
+  "investments": *[_type == "investment"] | order(_updatedAt desc),
   "news": *[_type == "newsArticle"] | order(_createdAt desc) [0 ... 5] {
     ...,
     "href": slug.current
@@ -109,7 +106,7 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
               key={investement.title}
             >
               <Card
-                href={investement.href}
+                href={investement.url}
                 image={investement.logo}
                 title={investement.title}
                 subtitle={investement.subtitle}
