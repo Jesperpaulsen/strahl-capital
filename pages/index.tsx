@@ -13,7 +13,10 @@ import Card from '../components/card/card'
 const query = `*[_type == 'home'][0] {
   ...,
   "numberOfInvestments": count(*[_type == "investment"]),
-  "investments": *[_type == "investment"] | order(_updatedAt desc),
+  "investments": *[_type == "investment"] | order(_updatedAt desc) {
+    ...,
+    "href": slug.current
+  },
   "news": *[_type == "newsArticle"] | order(_createdAt desc) [0 ... 5] {
     ...,
     "href": slug.current
@@ -67,7 +70,7 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context
         </div>
       </div>
       </Container>
-      <div className="flex justify-center">
+      <div className="flex justify-center px-6 md:px-0">
         <Prose>
           <BlockContentWrapper text={data.body} />
         </Prose>

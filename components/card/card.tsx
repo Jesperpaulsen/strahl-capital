@@ -16,21 +16,23 @@ const Component = (props) => props.slugPrefix ? <Link {...props} /> : <a {...pro
 
 const Card: React.FC<CardProps> = ({ image, title, subtitle, href, slugPrefix, large }) => {
   const [isHovering, setIsHovering] = useState(false)
-  const target = slugPrefix ? '_blank' : '_self'
-  let url = slugPrefix ? `${slugPrefix}/${href}` : href
-  
+  const url = slugPrefix ? `${slugPrefix}/${href}` : href
+  const target = slugPrefix ? '_self' : '_blank'
+
   return(
-    <Component
-      slugPrefix={slugPrefix}
+    <Link
       href={url}
-      target={target}
-      rel="noreferrer"
-      className="min-w-full"
+      passHref
     >
+      <a
+        target={target}
+        rel="noreferrer"
+        className="min-w-full"
+      >
       {large ?
         <div className="shadow-md rounded w-80 h-96 relative hover:shadow-2xl transition-shadow ease-in-out duration-300 cursor-pointer">
            {image?.asset && <ImageWrapper image={image} layout="fill" className="w-64 h-60 bg-green-400 top-0 absolute"/>}
-           <div className="text-2xl mt-auto text-center absolute bottom-0 bg-white pt-4 pb-2">
+           <div className="text-2xl mt-auto text-center absolute bottom-0 bg-white pt-4 pb-2 w-full">
              {title}
            </div>
         </div>
@@ -41,7 +43,7 @@ const Card: React.FC<CardProps> = ({ image, title, subtitle, href, slugPrefix, l
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
       >
-        {image?.asset && <ImageWrapper image={image} layout="fill" className="absolute w-36 h-36 md:w-60 md:h-60 top-0 bottom-0 m-auto" />}
+        {image?.asset && <ImageWrapper image={image} layout="fill" className="absolute top-0 bottom-0 p-2 m-auto" />}
         {isHovering && 
           <div className="absolute top-0 text-center w-full h-full flex justify-center items-center bg-black bg-opacity-90 rounded transition-opacity">
             <div className="text-white">
@@ -54,7 +56,8 @@ const Card: React.FC<CardProps> = ({ image, title, subtitle, href, slugPrefix, l
             </div>
       </div>}
       </div>}
-    </Component>
+      </a>
+    </Link>
     )
 }
 
