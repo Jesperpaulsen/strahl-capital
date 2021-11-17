@@ -9,6 +9,11 @@ function StrahlCapital({ Component, pageProps }) {
     <>
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="image"
+          property="og:image"
+          content="https://www.strahl.no/logo.png"
+        />
       </Head>
       <DefaultSeo
         title="Strahl Capital"
