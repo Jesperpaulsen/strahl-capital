@@ -20,7 +20,7 @@ function StrahlCapital({ Component, pageProps }) {
           locale: "en_IE",
           url: "https://www.strahl.no/",
           site_name: "Strahl Capital",
-          images: [{ url: "/strahl.png" }],
+          images: [{ url: "/logo.png" }],
           description: `Fuel for impact.
           There is no lack of important challenges to solve.
           We support teams seeking to make a positive impact for the benefit of people and the planet.`,
