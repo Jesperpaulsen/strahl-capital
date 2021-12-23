@@ -42,16 +42,11 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
       </Head>
       <div className="block lg:hidden">
         <div className="w-full">
-          <div className="h-52 relative">
-            <ImageWrapper
-              image={data.heroImage}
-              layout="fill"
-              objectFit="cover"
-            />
-            <div className="bg-gradient-to-t from-gray-900 top-0 w-full h-full absolute" />
-            <div className="text-3xl md:text-5xl text-center w-full pt-4 absolute top-1/2 text-white">
-              {data.title}
-            </div>
+          <div className="text-3xl md:text-5xl text-center w-full pt-4">
+            {data.title}
+          </div>
+          <div className="h-52 m-auto relative">
+            <ImageWrapper image={data.heroImage} layout="fill" />
           </div>
           <Container>
             <div className="text-xl font-light text-center">
