@@ -77,12 +77,17 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
           <BlockContentWrapper text={data.body} />
         </Prose>
       </div>
-      <Container>
+      <Container bleedMobile>
         <div>
-          <div className="text-2xl md:text-3xl py-4">Latest news</div>
-          <div className="flex flex-wrap justify-start">
-            {data.news.map((news) => (
-              <div className="px-0 pr-2 md:pr-5 py-2" key={news.title}>
+          <div className="text-2xl md:text-3xl py-4 ml-4">Latest news</div>
+          <div className="flex justify-start overflow-x-auto md:flex-wrap">
+            {data.news.map((news, i) => (
+              <div
+                className={`px-0 pr-2 md:pr-5 py-2 ${
+                  i === 0 ? "ml-4 md:ml-0" : ""
+                }`}
+                key={news.title}
+              >
                 <Card
                   large
                   href={news.href}
@@ -96,12 +101,15 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
           </div>
         </div>
         <div className="py-8">
-          <div className="text-2xl md:text-3xl py-4">
+          <div className="text-2xl md:text-3xl py-4 ml-4">
             Some of our investments
           </div>
-          <div className="flex flex-wrap justify-start">
-            {investmentsToShow.map((investement) => (
-              <div className="pr-4 pt-4" key={investement.title}>
+          <div className="flex md:flex-wrap overflow-x-auto justify-start">
+            {investmentsToShow.map((investement, i) => (
+              <div
+                className={`pr-4 pt-4 ${i === 0 ? "ml-4 md:ml-0" : ""}`}
+                key={investement.title}
+              >
                 <Card
                   href={investement.url}
                   image={investement.logo}
