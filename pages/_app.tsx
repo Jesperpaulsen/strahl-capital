@@ -16,7 +16,7 @@ function StrahlCapital({ Component, pageProps }) {
         />
       </Head>
       <DefaultSeo
-        title="Strahl Capital"
+        title="Strahl Capital - Luis Gayosso Paulsen"
         description="Fuel for impact.
         There is no lack of important challenges to solve.
         We support teams seeking to make a positive impact for the benefit of people and the planet."
@@ -29,6 +29,7 @@ function StrahlCapital({ Component, pageProps }) {
           description: `Fuel for impact.
           There is no lack of important challenges to solve.
           We support teams seeking to make a positive impact for the benefit of people and the planet.`,
+          profile: { firstName: "Luis", lastName: "Gayosso Paulsen" },
         }}
       />
       <Layout preview={pageProps.preview}>
