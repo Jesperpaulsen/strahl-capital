@@ -1,85 +1,77 @@
-import Head from 'next/head'
-import React from 'react'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import Container from '../components/container/container'
-import Input from '../components/input/input'
+import { InferGetStaticPropsType } from "next";
+import Head from "next/head";
+import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import BlockContentWrapper from "../components/blockContentWrapper/blockContentWrapper";
+import ContactForm from "../components/contactForm";
+import Container from "../components/container/container";
+import ImageWrapper from "../components/imageWrapper/imageWrapper";
+import Input from "../components/input/input";
+import Prose from "../components/prose/prose";
+import SanityPageService from "../services/SanityPageService";
+import ContactPage from "../types/ContactPage";
 
-const Contact: React.FC = () => {
-  const [email, setEmail] = useState('')
-  const [name, setName] = useState('')
-  const [message, setMessage] = useState('')
-  const [error, setError] = useState('')
-  const [success, setSuccess] = useState('')
+const query = `*[_type == 'contact'][0]`;
 
-  useEffect(() => {
-    setError('')
-    setSuccess('')
-  }, [email, name, message])
+const pageService = new SanityPageService<ContactPage>(query);
 
-  const sendMessage = async (e) => {
-    e.preventDefault()
-    if (email.length < 4 || name.length < 4 || message.length < 4) {
-      setError('Please fill out all fields')
-      return
-    }
-    try {
-      const res = await fetch('/api/send-message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, name, message }),
-      })
-      console.log(res)
-      if (!res.ok) {
-        setError("Something went wrong when sending the request. Please send us an email instead.")
-      } else {
-        setSuccess("Thanks for reaching out. We will get in touch as soon as possible.")
-      }
-    } catch (e) {
-      setError("Something went wrong when sending the request. Please send us an email instead.")
-    }
-  }
-
+const Contact: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
+  context
+) => {
+  const { data } = pageService.getPreviewHook(context)();
   return (
     <>
       <Head>
-        <title>Contact us | Strahl Capital</title>
+        <title>{data.title} | Strahl Capital</title>
       </Head>
-      <div>
-        <Container>
-          <div className="text-2xl flex justify-center pt-10">
-            Get in touch
+      <div className="block lg:hidden">
+        <div className="w-full">
+          <div className="text-3xl md:text-5xl text-center w-full pt-4">
+            {data.title}
           </div>
-          {/*<div className="flex justify-center">
-            Use the form below or send us an email at &nbsp;<a href="mailto:luisp@eunet.no">luisp@eunet.no</a>
-  </div>*/}
-          <div className="flex justify-center">
-            {success ? <div className="text-sm text-green-600 text-center">{success}</div> : <form className="max-w-lg w-96">
-                <div className="flex-row items-center">
-                  <div className="pt-4">
-                    <Input label="Name" placeholder="Enter your name" onChange={(value) => setName(value)} />
-                  </div>
-                  <div className="pt-4">
-                    <Input label="Email" placeholder="Enter email" onChange={(value) => setEmail(value)} />
-                  </div>
-                  <div className="pt-4">
-                    <Input label="Message" placeholder="Enter your message" onChange={(value) => setMessage(value)} textArea />
-                  </div>
-                  <div className="flex justify-center">
-                    <button className="rounded bg-green-300 px-4 py-2 hover:shadow-md" onClick={sendMessage}>
-                      Send
-                    </button>
-                  </div>
-                  {error && <div className="text-sm text-red-600 text-center">{error}</div>}
-                </div>
-            </form>}
+          <div className="h-52 m-auto relative">
+            <ImageWrapper image={data.heroImage} layout="fill" />
           </div>
-        </Container>
+          <Container>
+            <div className="text-xl font-light text-center">
+              <BlockContentWrapper text={data.subTitle} />
+            </div>
+          </Container>
+          <ContactForm />
+        </div>
       </div>
+      <Container bleedMobile>
+        <div className="hidden lg:block">
+          <div className="flex w-full h-4/6 md:justify-between items-center flex-wrap py-32">
+            <div className="w-5/12">
+              <div className="text-3xl md:text-6xl xl:text-7xl md:leading-tight font-semibold text-center md:text-left">
+                {data.title}
+              </div>
+              <ContactForm />
+              <div className="md:text-2xl lg:text-3xl pt-2 md:pt-4 font-light">
+                <BlockContentWrapper text={data.subTitle} />
+              </div>
+            </div>
+            <div className="w-1/2 py-3 md:py-0">
+              <ImageWrapper image={data.heroImage} />
+            </div>
+          </div>
+        </div>
+      </Container>
+      <Container>
+        <div className="flex justify-center pt-5">
+          <Prose>
+            <BlockContentWrapper text={data.body} />
+          </Prose>
+        </div>
+      </Container>
     </>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
+
+export function getStaticProps(context) {
+  return pageService.fetchQuery(context);
+}
