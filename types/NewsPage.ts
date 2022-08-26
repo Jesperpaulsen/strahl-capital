@@ -7,7 +7,7 @@ interface NewsPage extends SanityDocument {
   description: Block[],
   news: {
     title: string,
-    subtitle: string,
+    createdAt: string,
     image: DefaultImage,
     href: string
   }[]

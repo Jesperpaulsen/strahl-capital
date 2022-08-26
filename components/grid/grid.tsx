@@ -11,16 +11,17 @@ interface GridProps {
     subtitle: string;
     image: DefaultImage;
     href: string;
+    noPadding: boolean;
   }[];
 }
 
 const Grid: React.FC<GridProps> = ({ items, title, slugPrefix, large }) => {
   return (
-    <div className="w-full">
+    <div className="w-full pb-4">
       {title && (
         <div className="text-heading-xl pt-10">{title.toUpperCase()}</div>
       )}
-      <div className={`grid grid-cols-2 xl:grid-cols-4 gap-5 pt-4 w-max`}>
+      <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 pt-4 w-max`}>
         {items.map((item, i) => (
           <Card
             key={`card-${i}`}

@@ -17,7 +17,8 @@ const query = `*[_type == "investments"][0] {
       title,
       "subtitle": location->title,
       "image": logo,
-      "href": url
+      "href": url,
+      "noPadding": logoShouldTakeFullWidth
     }
   }
 }`
@@ -27,8 +28,6 @@ const pageService = new SanityPageService<InvestmentsPage>(query)
 const Investments: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (context) => {
   const { data } = pageService.getPreviewHook(context)()
 
-  const [filter, setFilter] = useState('')
-  console.log(data)
 
   return (
     <>

@@ -9,11 +9,6 @@ export default {
       title: 'Title'
     },
     {
-      name: 'heroImage',
-      type: 'defaultImage',
-      title: 'Hero Image'
-    },
-    {
       name: 'body',
       type: 'blockContent',
       title: 'Body'

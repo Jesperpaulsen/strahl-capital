@@ -21,12 +21,10 @@ const NewsArticle: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (c
       <Head>
         <title>{data.title} | Strahl Capital</title>
       </Head>
-      <div className="relative">
-        {data.image?.asset && <div className="h-80">
-          <ImageWrapper image={data.image} height={500} layout="fill" objectFit="cover" className="px-6" />
-        </div>}
-        </div>
       <Container>
+        {data.image?.asset && <div className="h-80 relative">
+          <ImageWrapper image={data.image} layout="fill" className="px-6" />
+        </div>}
         <div className="w-full flex justify-center pt-10">
           <div className="text-3xl md:text-5xl xl:text-6xl md:leading-tight max-w-4xl text-center font-semibold">
             {data.title}

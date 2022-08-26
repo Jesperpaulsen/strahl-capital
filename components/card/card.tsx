@@ -10,10 +10,9 @@ interface CardProps {
   href: string;
   slugPrefix?: string;
   large?: boolean;
+  noPadding?: boolean;
 }
 
-const Component = (props) =>
-  props.slugPrefix ? <Link {...props} /> : <a {...props} />;
 
 const Card: React.FC<CardProps> = ({
   image,
@@ -22,16 +21,17 @@ const Card: React.FC<CardProps> = ({
   href,
   slugPrefix,
   large,
+  noPadding = true,
 }) => {
   const [isHovering, setIsHovering] = useState(false);
   const url = slugPrefix ? `${slugPrefix}/${href}` : href;
   const target = slugPrefix ? "_self" : "_blank";
-
+  
   return (
     <Link href={url || ""} passHref>
       <a target={target} rel="noreferrer" className="min-w-full">
         {large ? (
-          <div className="shadow rounded w-36 h-44 md:w-80 md:h-96 relative hover:shadow-2xl transition-shadow ease-in-out duration-300 cursor-pointer bg-white bg-opacity-70">
+          <div className="shadow rounded w-36 h-44 md:w-80 md:h-96 relative hover:shadow-2xl transition-shadow ease-in-out duration-300 cursor-pointer bg-gray-100 bg-opacity-70">
             {image?.asset && (
               <ImageWrapper
                 image={image}
@@ -50,12 +50,16 @@ const Card: React.FC<CardProps> = ({
             onMouseLeave={() => setIsHovering(false)}
           >
             {image?.asset && (
-              <ImageWrapper
-                image={image}
-                layout="fill"
-                className="absolute top-0 bottom-0 p-2 m-auto"
-              />
+              <div className="w-full flex justify-center items-center h-full">
+                <div className={`relative ${noPadding ? 'w-full' : 'w-11/12'} h-full`}>
+                  <ImageWrapper
+                    image={image}
+                    layout="fill"
+                  />
+                </div>
+              </div>
             )}
+
             {isHovering && (
               <div className="absolute top-0 text-center w-full h-full flex justify-center items-center bg-black bg-opacity-90 rounded transition-opacity">
                 <div className="text-white">

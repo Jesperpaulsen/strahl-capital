@@ -7,6 +7,7 @@ export default interface Investment extends SanityDocument {
   title: string,
   slug: Slug,
   logo: DefaultImage,
+  logoShouldTakeFullWidth: boolean,
   url: string,
   location: Location,
   category: InvestmentCategory,

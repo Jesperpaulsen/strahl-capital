@@ -1,9 +1,8 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-const className = 'border p-4 w-full border-grey-200 text-grey-900 rounded-xl bg-grey-500 bg-opacity-40 appearance-none leading-tight focus:outline-none focus:shadow-outline text-sm'
+const className = 'border p-3 w-full border-gray-200 text-gray-900 opacity-60 rounded-xl appearance-none leading-tight focus:outline-none focus:shadow-outline text-sm'
 
 interface InputProps {
-  initialValue?: string
   onChange: (value: string) => void
   placeholder?: string
   label?: string
@@ -11,12 +10,10 @@ interface InputProps {
   numberOfRows?: number
 }
 
-const Input: React.FC<InputProps> = ({ initialValue = '', onChange, placeholder, label, textArea = false, numberOfRows = 6 }) => {
-  const [value, setValue] = useState(initialValue)
+const Input: React.FC<InputProps> = ({ onChange, placeholder, label, textArea = false, numberOfRows = 6 }) => {
 
   const handleChange = (e) => {
     const value = e.target.value
-    setValue(value)
     onChange(value)
   }
 
@@ -29,7 +26,6 @@ const Input: React.FC<InputProps> = ({ initialValue = '', onChange, placeholder,
         ? <textarea
           className={className}
           placeholder={placeholder}
-          value={value}
           rows={numberOfRows}
           onChange={handleChange}
         />
@@ -37,7 +33,6 @@ const Input: React.FC<InputProps> = ({ initialValue = '', onChange, placeholder,
           type="text"
           className={className}
           placeholder={placeholder}
-          value={value}
           onChange={handleChange}
         />}
     </>

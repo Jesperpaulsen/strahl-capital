@@ -17,13 +17,17 @@ interface ImageWrapperProps {
 const ImageWrapper: React.FC<ImageWrapperProps> = ({ image, height, width, className, layout="responsive", objectFit, objectPosition }) => {
   const imageProps = useNextSanityImage(sanity.client, image)
   
+  
   if (height) imageProps.height = height
   if (width) imageProps.width = width
 
   if (layout === 'fill') {
+    delete imageProps.height;
+    delete imageProps.width;
     (imageProps as any).objectFit = objectFit || 'contain';
-    (imageProps as any).objectPosition = objectPosition || "50% 50%;"
+    (imageProps as any).objectPosition = objectPosition || "50% 50%"
   }
+
 
   return (
     <Img {...imageProps} className={className || ''} layout={layout} sizes={`(max-width: ${width}px) 100vw, 800px`} />

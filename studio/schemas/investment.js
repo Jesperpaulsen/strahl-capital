@@ -24,6 +24,13 @@ export default {
       title: 'Logo'
     },
     {
+      name: 'logoShouldTakeFullWidth',
+      type: 'boolean',
+      title: 'Logo should take full width',
+      description: 'If set to true, the logo will take the full width of the container.',
+      initialValue: false
+    },
+    {
       name: 'url',
       type: 'url',
       title: 'URL'

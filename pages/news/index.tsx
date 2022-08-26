@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import BlockContentWrapper from "../../components/blockContentWrapper/blockContentWrapper";
 import Container from "../../components/container/container";
 import Grid from "../../components/grid/grid";
+import NewsTeaser from "../../components/news/NewsTeaser";
 import Prose from "../../components/prose/prose";
 import SanityPageService from "../../services/SanityPageService";
 import AboutPage from "../../types/AboutPage";
@@ -15,7 +16,7 @@ const query = `*[_type == "news"][0] {
   description,
   "news": *[_type == "newsArticle"] | order(_createdAt desc) {
     title,
-    "subtitle": _createdAt,
+    "createdAt": _createdAt,
     image,
     "href": slug.current
   }
@@ -33,18 +34,26 @@ const News: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
       <Head>
         <title>{data.title}</title>
       </Head>
-      <div className="pt-8">
-        <Container>
+        <div className="w-full px-5 md:px-12">
+          <div className="pt-8">
           <div className="text-3xl md:text-6xl xl:text-7xl md:leading-tight font-semibold">
             {data.title}
           </div>
           <Prose large>
             <BlockContentWrapper text={data.description} />
           </Prose>
-          <div className="w-full max-w-5xl">
-            <Grid large slugPrefix="/news" items={data.news} />
+          <div className="flex justify-start flex-wrap">
+            {data.news.map((news) => (
+              <NewsTeaser
+                key={news.title}
+                image={news.image}
+                slug={news.href}
+                title={news.title}
+                createdAt={news.createdAt}
+              />
+            ))}
           </div>
-        </Container>
+        </div>
       </div>
     </>
   );

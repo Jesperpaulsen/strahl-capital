@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { InferGetStaticPropsType } from "next";
 import Container from "../components/container/container";
 import Head from "next/head";
-import { CMS_NAME } from "../lib/constants";
 import SanityPageService from "../services/SanityPageService";
 import HomePage from "../types/HomePage";
 import ImageWrapper from "../components/imageWrapper/imageWrapper";
 import BlockContentWrapper from "../components/blockContentWrapper/blockContentWrapper";
 import Prose from "../components/prose/prose";
 import Card from "../components/card/card";
+import NewsTeaser from "../components/news/NewsTeaser";
 
 const query = `*[_type == 'home'][0] {
   ...,
-  "numberOfInvestments": count(*[_type == "investment"]),
-  "investments": *[_type == "investment"] | order(_updatedAt desc),
+  "investments": *[_type == "investment"],
   "news": *[_type == "newsArticle"] | order(_createdAt desc) [0 ... 4] {
     ...,
+    "createdAt": _createdAt,
     "href": slug.current
   }
 }`;
@@ -27,13 +27,23 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
 ) => {
   const { data } = pageService.getPreviewHook(context)();
 
-  const randomInvestmentStart = Math.floor(
-    Math.random() * (data.numberOfInvestments - 5)
-  );
-  const investmentsToShow = data.investments.slice(
-    randomInvestmentStart,
-    randomInvestmentStart + 5
-  );
+  const [isMounted, setIsMounted] = useState(false)
+
+  const investmentsToShow = useMemo(() => { 
+    const randomInvestmentStart = Math.floor(
+      Math.random() * (data.investments.length - 5)
+    );
+
+    const slicedInvestements = data.investments.slice(randomInvestmentStart, randomInvestmentStart + 5)
+
+    return slicedInvestements || []
+
+  }, [data.investments])
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [investmentsToShow])
+
 
   return (
     <>
@@ -45,8 +55,8 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
           <div className="text-3xl md:text-5xl text-center w-full pt-4">
             {data.title}
           </div>
-          <div className="h-52 m-auto relative">
-            <ImageWrapper image={data.heroImage} layout="fill" />
+          <div className="h-52 relative mt-3">
+            <ImageWrapper image={data.heroImage} layout="fill" objectFit="cover" />
           </div>
           <Container>
             <div className="text-xl font-light text-center">
@@ -77,48 +87,41 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
           <BlockContentWrapper text={data.body} />
         </Prose>
       </div>
-      <Container bleedMobile>
-        <div>
-          <div className="text-2xl md:text-3xl py-4 ml-4">Latest news</div>
-          <div className="flex justify-start overflow-x-auto md:flex-wrap">
+      <Container>
+          <div className="text-2xl md:text-3xl py-4 ml-4 md:ml-0">Latest news</div>
+          <div className="flex justify-start flex-wrap">
             {data.news.map((news, i) => (
-              <div
-                className={`px-0 pr-2 md:pr-5 py-2 ${
-                  i === 0 ? "ml-4 md:ml-0" : ""
-                }`}
+              <NewsTeaser
                 key={news.title}
-              >
-                <Card
-                  large
-                  href={news.href}
-                  image={news.image}
-                  title={news.title}
-                  slugPrefix="/news"
-                  subtitle={news.subtitle}
-                />
-              </div>
+                image={news.image}
+                slug={news.href}
+                title={news.title}
+                createdAt={news.createdAt}
+              />
             ))}
           </div>
-        </div>
+        </Container>
+        <Container bleedMobile>
         <div className="py-8">
-          <div className="text-2xl md:text-3xl py-4 ml-4">
+          <div className="text-2xl md:text-3xl py-4 ml-4 md:ml-0">
             Some of our investments
           </div>
-          <div className="flex md:flex-wrap overflow-x-auto justify-start">
+          {isMounted && <div className="flex md:flex-wrap overflow-x-auto justify-start">
             {investmentsToShow.map((investement, i) => (
               <div
                 className={`pr-4 pt-4 ${i === 0 ? "ml-4 md:ml-0" : ""}`}
-                key={investement.title}
+                key={investement._id}
               >
                 <Card
+                  noPadding={investement.logoShouldTakeFullWidth}
                   href={investement.url}
                   image={investement.logo}
                   title={investement.title}
-                  subtitle={investement.subtitle}
+                  subtitle=""
                 />
               </div>
             ))}
-          </div>
+          </div>}
         </div>
       </Container>
     </>

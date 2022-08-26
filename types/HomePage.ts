@@ -1,5 +1,6 @@
 import { SanityDocument, Block } from "@sanity/types";
 import DefaultImage from "./DefaultImage";
+import Investment from "./Investment";
 
 interface HomePage extends SanityDocument {
   title: string;
@@ -11,14 +12,9 @@ interface HomePage extends SanityDocument {
     subtitle: string;
     image: DefaultImage;
     href: string;
+    createdAt: string
   }[];
-  numberOfInvestments: number;
-  investments: {
-    title: string;
-    subtitle: string;
-    logo: DefaultImage;
-    url: string;
-  }[];
+  investments: Investment[];
 }
 
 export default HomePage;

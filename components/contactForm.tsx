@@ -34,7 +34,7 @@ const ContactForm: React.FC = () => {
       console.log(res);
       if (!res.ok) {
         setError(
-          "Something went wrong when sending the request. Please send us an email instead."
+          "Something went wrong when sending the request. Please send an email to Luis instead: luisp@eunet.no"
         );
       } else {
         setSuccess(
@@ -43,7 +43,7 @@ const ContactForm: React.FC = () => {
       }
     } catch (e) {
       setError(
-        "Something went wrong when sending the request. Please send us an email instead."
+        "Something went wrong when sending the request. Please send an email to Luis instead: luisp@eunet.no"
       );
     }
   };

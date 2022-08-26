@@ -12,6 +12,7 @@ interface InvestmentsPage extends SanityDocument {
       subtitle: string,
       image: DefaultImage,
       href: string
+      noPadding: boolean
     }[]
   }[]
 }
