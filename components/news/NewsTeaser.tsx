@@ -13,7 +13,7 @@ interface NewsTeaserProps {
 
 const NewsTeaser: React.FC<NewsTeaserProps> = ({ title, slug, image, createdAt }) => {
   return <div className="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 md:pr-5 mb-5">
-    <Link href={`/news/${slug}`} passHref>
+    <Link href={`/news/${slug}`} passHref legacyBehavior>
       <a className="block w-full rounded-md shadow-sm bg-white dark:bg-black focus:outline-none group transition ease-in-out duration-300 hover:shadow-lg focus:shadow-lg">
         <div className="overflow-hidden rounded-t-md">
           <div className="w-full h-64 md:h-96 relative">

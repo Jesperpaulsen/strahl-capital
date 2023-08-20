@@ -33,7 +33,7 @@ const Header: React.FC = () => {
               : "hover:text-green-900"
           } pr-2 pl-1 pb-0 pt-1 w-min`}
         >
-          <Link href="/">Strahl Capital</Link>
+          <Link href="/" legacyBehavior>Strahl Capital</Link>
         </div>
       </div>
       <div className="w-full flex md:justify-end md:w-1/2">
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
                   : "hover:text-green-900"
               } pr-2 pl-1 pb-0 pt-1`}
             >
-              <Link href={menu.href}>{menu.title}</Link>
+              <Link href={menu.href} legacyBehavior>{menu.title}</Link>
             </div>
           </div>
         ))}

@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({
   const target = slugPrefix ? "_self" : "_blank";
   
   return (
-    <Link href={url || ""} passHref>
+    <Link href={url || ""} passHref legacyBehavior>
       <a target={target} rel="noreferrer" className="min-w-full">
         {large ? (
           <div className="shadow rounded w-36 h-44 md:w-80 md:h-96 relative hover:shadow-2xl transition-shadow ease-in-out duration-300 cursor-pointer bg-gray-100 bg-opacity-70">

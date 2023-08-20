@@ -1,6 +1,6 @@
 import React from 'react'
 import DefaultImage from '../../types/DefaultImage'
-import Img from 'next/image'
+import Img from "next/legacy/image"
 import { useNextSanityImage } from 'next-sanity-image'
 import sanity from '../../services/sanity'
 
@@ -17,7 +17,8 @@ interface ImageWrapperProps {
 const ImageWrapper: React.FC<ImageWrapperProps> = ({ image, height, width, className, layout="responsive", objectFit, objectPosition }) => {
   const imageProps = useNextSanityImage(sanity.client, image)
   
-  
+  if (!imageProps?.src) return null
+
   if (height) imageProps.height = height
   if (width) imageProps.width = width
 
@@ -27,7 +28,6 @@ const ImageWrapper: React.FC<ImageWrapperProps> = ({ image, height, width, class
     (imageProps as any).objectFit = objectFit || 'contain';
     (imageProps as any).objectPosition = objectPosition || "50% 50%"
   }
-
 
   return (
     <Img {...imageProps} className={className || ''} layout={layout} sizes={`(max-width: ${width}px) 100vw, 800px`} />
