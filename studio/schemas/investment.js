@@ -56,6 +56,15 @@ export default {
       name: 'description',
       type: 'blockContent',
       title: 'Description'
+    },
+    {
+      name: 'exitDate',
+      type: 'date',
+      title: 'Exit Date',
+      options: {
+        dateFormat: 'YYYY-MM-DD',
+        calendarTodayLabel: 'Today'
+      }
     }
   ]
 }

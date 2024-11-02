@@ -4,6 +4,7 @@ import schemaTypes from "all:part:@sanity/base/schema-type";
 import about from "./pages/about";
 import home from "./pages/home";
 import investments from "./pages/investments";
+import exits from "./pages/exits";
 import news from "./pages/news";
 import contact from "./pages/contact";
 
@@ -18,6 +19,7 @@ const schemas = [
   about,
   home,
   investments,
+  exits,
   news,
   contact,
   defaultImage,

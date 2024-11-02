@@ -13,4 +13,5 @@ export default interface Investment extends SanityDocument {
   category: InvestmentCategory,
   shortDescription: Block[],
   description: Block[]
+  exitDate: string,
 }

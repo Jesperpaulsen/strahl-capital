@@ -49,6 +49,16 @@ export default () => {
         )
         .icon(FiGrid),
       S.listItem()
+        .title("Exits Page")
+        .child(
+          S.editor()
+            .id("exits")
+            .schemaType("exits")
+            .documentId("exits")
+            .views(getPreview("exits"))
+        )
+        .icon(FiGrid),
+      S.listItem()
         .title("News Page")
         .child(
           S.editor()

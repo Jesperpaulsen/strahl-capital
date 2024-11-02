@@ -13,7 +13,7 @@ const query = `*[_type == "investments"][0] {
   ...,
   "investmentPerCategory": *[_type == "investmentCategory"] | order(_updatedAt desc) {
     ...,
-    "investments": *[_type == "investment" && references(^._id)] | order(lower(title)) {
+    "investments": *[_type == "investment" && references(^._id) && !defined(exitDate)] | order(lower(title)) {
       title,
       "subtitle": location->title,
       "image": logo,

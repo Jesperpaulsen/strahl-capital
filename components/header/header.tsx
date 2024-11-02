@@ -12,6 +12,10 @@ const menus = [
     href: "/investments",
   },
   {
+    title: "Exits",
+    href: "/exits",
+  },
+  {
     title: "News",
     href: "/news",
   },
