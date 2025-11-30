@@ -213,8 +213,8 @@ const Index: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
               Ready to Partner With Us?
             </h2>
             <p className="mt-4 text-lg text-primary-200">
-              We're always looking for innovative companies making a positive
-              impact. Let's start a conversation.
+              We&apos;re always looking for innovative companies making a positive
+              impact. Let&apos;s start a conversation.
             </p>
             <Link
               href="/contact"

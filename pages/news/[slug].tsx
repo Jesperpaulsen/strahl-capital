@@ -34,7 +34,7 @@ const NewsArticle: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
           <ImageWrapper
             image={data.image}
             layout="fill"
-            className="object-cover"
+            objectFit="cover"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
         </div>
