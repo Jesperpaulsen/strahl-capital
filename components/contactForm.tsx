@@ -1,9 +1,5 @@
-import Head from "next/head";
-import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import Container from "../components/container/container";
-import Input from "../components/input/input";
+import React, { useEffect, useState } from "react";
+import Input from "./input/input";
 
 const ContactForm: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -11,18 +7,22 @@ const ContactForm: React.FC = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     setError("");
     setSuccess("");
   }, [email, name, message]);
 
-  const sendMessage = async (e) => {
+  const sendMessage = async (e: React.FormEvent) => {
     e.preventDefault();
     if (email.length < 4 || name.length < 4 || message.length < 4) {
       setError("Please fill out all fields");
       return;
     }
+
+    setIsLoading(true);
+
     try {
       const res = await fetch("/api/send-message", {
         method: "POST",
@@ -31,7 +31,7 @@ const ContactForm: React.FC = () => {
         },
         body: JSON.stringify({ email, name, message }),
       });
-      console.log(res);
+
       if (!res.ok) {
         setError(
           "Something went wrong when sending the request. Please send an email to Luis instead: luisp@eunet.no"
@@ -45,63 +45,96 @@ const ContactForm: React.FC = () => {
       setError(
         "Something went wrong when sending the request. Please send an email to Luis instead: luisp@eunet.no"
       );
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  return (
-    <>
-      <div>
-        <Container>
-          <div className="flex justify-center">
-            {success ? (
-              <div className="text-sm text-green-600 text-center">
-                {success}
-              </div>
-            ) : (
-              <form className="max-w-lg w-96">
-                <div className="flex-row items-center">
-                  <div className="pt-4">
-                    <Input
-                      label="Name"
-                      placeholder="Enter your name"
-                      onChange={(value) => setName(value)}
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <Input
-                      label="Email"
-                      placeholder="Enter email"
-                      onChange={(value) => setEmail(value)}
-                    />
-                  </div>
-                  <div className="pt-4">
-                    <Input
-                      label="Message"
-                      placeholder="Enter your message"
-                      onChange={(value) => setMessage(value)}
-                      textArea
-                    />
-                  </div>
-                  <div className="flex justify-center">
-                    <button
-                      className="rounded bg-green-300 px-4 py-2 hover:shadow-md"
-                      onClick={sendMessage}
-                    >
-                      Send
-                    </button>
-                  </div>
-                  {error && (
-                    <div className="text-sm text-red-600 text-center">
-                      {error}
-                    </div>
-                  )}
-                </div>
-              </form>
-            )}
+  if (success) {
+    return (
+      <div className="w-full max-w-md mx-auto">
+        <div className="bg-primary-50 border border-primary-200 rounded-2xl p-6 text-center">
+          <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg
+              className="w-6 h-6 text-primary-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
           </div>
-        </Container>
+          <p className="text-primary-800 font-medium">{success}</p>
+        </div>
       </div>
-    </>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-md mx-auto">
+      <form onSubmit={sendMessage} className="space-y-5">
+        <Input
+          label="Name"
+          placeholder="Your name"
+          onChange={(value) => setName(value)}
+        />
+        <Input
+          label="Email"
+          placeholder="your@email.com"
+          onChange={(value) => setEmail(value)}
+        />
+        <Input
+          label="Message"
+          placeholder="How can we help you?"
+          onChange={(value) => setMessage(value)}
+          textArea
+        />
+
+        <button
+          type="submit"
+          disabled={isLoading}
+          className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isLoading ? (
+            <span className="flex items-center justify-center">
+              <svg
+                className="animate-spin -ml-1 mr-2 h-4 w-4 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                />
+                <path
+                  className="opacity-75"
+                  fill="currentColor"
+                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                />
+              </svg>
+              Sending...
+            </span>
+          ) : (
+            "Send Message"
+          )}
+        </button>
+
+        {error && (
+          <div className="bg-red-50 border border-red-200 rounded-xl p-4">
+            <p className="text-sm text-red-600 text-center">{error}</p>
+          </div>
+        )}
+      </form>
+    </div>
   );
 };
 

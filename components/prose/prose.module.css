@@ -1,14 +1,13 @@
 .prose {
-  /* Apply a overwriteable max width */
   @apply max-w-3xl;
 
   /* Margin Defaults */
   & * + * {
-    @apply mt-5 md:mt-8;
+    @apply mt-5 md:mt-6;
   }
 
   & hr {
-    @apply border-b border-gray-100 border-t-0;
+    @apply border-b border-neutral-200 border-t-0 my-8;
   }
 
   & * + button {
@@ -16,41 +15,40 @@
   }
 
   & p + p {
-    @apply mt-4 md:mt-6;
+    @apply mt-4 md:mt-5;
   }
 
   & li + li {
-    @apply mt-4;
+    @apply mt-3;
   }
 
   /* Common Elements Sizing/Colors */
   & p,
   & ul,
   & ol {
-    @apply text-sm md:text-base text-gray-600;
+    @apply text-base md:text-lg text-neutral-600 leading-relaxed;
   }
 
   & p > a {
-    @apply underline hover:text-gray-900 focus:text-gray-900;
+    @apply text-primary-600 hover:text-primary-700 underline decoration-primary-300 underline-offset-2 transition-colors;
   }
 
   & ul {
     & li {
-      @apply relative pl-5;
+      @apply relative pl-6;
     }
   }
 
   & ul li::before {
-    content: " ";
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 6px;
     height: 6px;
     border-radius: 100%;
-    margin-top: 8px;
-
-    @apply bg-gray-700;
+    margin-top: 10px;
+    @apply bg-primary-500;
   }
 
   & ol {
@@ -59,7 +57,7 @@
 
   & img,
   & figure {
-    @apply mt-6 md:mt-8;
+    @apply mt-8 md:mt-10 rounded-xl;
   }
 
   /* Used for Next/Img element due to inline margin styling */
@@ -85,15 +83,15 @@
   }
 
   & strong {
-    @apply text-black font-medium text-opacity-100;
+    @apply text-neutral-900 font-semibold;
   }
 
   & blockquote {
-    @apply bg-gray-50 rounded-md p-6;
+    @apply bg-primary-50 rounded-xl p-6 border-l-4 border-primary-500 italic;
   }
 
   & cite {
-    @apply not-italic text-sm mt-3 block font-medium;
+    @apply not-italic text-sm mt-4 block font-medium text-neutral-500;
   }
 
   /* Headings */
@@ -101,13 +99,13 @@
   & h2,
   & h3,
   & h4 {
-    @apply uppercase text-gray-800;
+    @apply text-neutral-900 font-semibold tracking-tight;
   }
 
   & * + h2,
   & * + h3,
   & * + h4 {
-    @apply mt-8;
+    @apply mt-10;
   }
 
   & h4 + * {
@@ -115,15 +113,15 @@
   }
 
   & h1 {
-    @apply text-heading-md md:text-heading-lg xl:text-heading-xl;
+    @apply text-heading-lg md:text-heading-xl xl:text-heading-2xl;
   }
 
   & h2 {
-    @apply text-heading-sm md:text-heading-md xl:text-heading-lg;
+    @apply text-heading-md md:text-heading-lg xl:text-heading-xl;
   }
 
   & h3 {
-    @apply text-heading-xs md:text-heading-sm xl:text-heading-md;
+    @apply text-heading-sm md:text-heading-md xl:text-heading-lg;
   }
 
   & h4 {
@@ -135,7 +133,7 @@
   & p,
   & ul,
   & ol {
-    @apply text-sm md:text-base xl:text-lg;
+    @apply text-base md:text-lg xl:text-xl;
   }
 
   & h1 {
@@ -162,14 +160,18 @@
   & p,
   & ul,
   & ol {
-    @apply text-gray-200;
+    @apply text-neutral-200;
   }
 
   & blockquote {
-    @apply bg-white bg-opacity-5;
+    @apply bg-white bg-opacity-10 border-white border-opacity-30;
   }
 
   & strong {
     @apply text-white;
+  }
+
+  & p > a {
+    @apply text-primary-300 hover:text-primary-200;
   }
 }

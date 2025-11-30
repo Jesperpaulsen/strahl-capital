@@ -1,14 +1,11 @@
 import { InferGetStaticPropsType } from "next";
 import Head from "next/head";
-import React, { useState } from "react";
+import React from "react";
 import BlockContentWrapper from "../../components/blockContentWrapper/blockContentWrapper";
 import Container from "../../components/container/container";
-import Grid from "../../components/grid/grid";
 import NewsTeaser from "../../components/news/NewsTeaser";
 import Prose from "../../components/prose/prose";
 import SanityPageService from "../../services/SanityPageService";
-import AboutPage from "../../types/AboutPage";
-import InvestmentsPage from "../../types/InvestmentsPage";
 import NewsPage from "../../types/NewsPage";
 
 const query = `*[_type == "news"][0] {
@@ -32,17 +29,30 @@ const News: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
   return (
     <>
       <Head>
-        <title>{data.title}</title>
+        <title>{data.title} | Strahl Capital</title>
       </Head>
-        <div className="w-full px-5 md:px-12">
-          <div className="pt-8">
-          <div className="text-3xl md:text-6xl xl:text-7xl md:leading-tight font-semibold">
-            {data.title}
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-neutral-50" />
+        <Container className="relative">
+          <div className="py-16 md:py-24 lg:py-32">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 tracking-tight">
+              {data.title}
+            </h1>
+            <div className="mt-6 max-w-2xl">
+              <Prose large>
+                <BlockContentWrapper text={data.description} />
+              </Prose>
+            </div>
           </div>
-          <Prose large>
-            <BlockContentWrapper text={data.description} />
-          </Prose>
-          <div className="flex justify-start flex-wrap">
+        </Container>
+      </section>
+
+      {/* News Grid Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <Container>
+          <div className="flex flex-wrap -mx-2 md:-mx-3">
             {data.news.map((news) => (
               <NewsTeaser
                 key={news.title}
@@ -53,8 +63,8 @@ const News: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
               />
             ))}
           </div>
-        </div>
-      </div>
+        </Container>
+      </section>
     </>
   );
 };

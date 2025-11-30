@@ -2,6 +2,92 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: #ebf1de;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-800;
+    font-feature-settings: "kern" 1, "liga" 1;
+  }
+
+  ::selection {
+    @apply bg-primary-200 text-primary-900;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight text-neutral-900;
+  }
+
+  a {
+    @apply transition-colors duration-200;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .container-padding {
+    @apply px-5 md:px-8 lg:px-12;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary-600 to-primary-500 bg-clip-text text-transparent;
+  }
+
+  .card-base {
+    @apply bg-white rounded-2xl shadow-soft transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply hover:shadow-elevated hover:-translate-y-1;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 rounded-xl shadow-soft hover:bg-primary-700 hover:shadow-medium focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 text-base font-medium text-primary-700 bg-primary-50 rounded-xl hover:bg-primary-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500 transition-all duration-200;
+  }
+
+  .input-base {
+    @apply w-full px-4 py-3 text-neutral-900 placeholder-neutral-400 bg-white border border-neutral-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200;
+  }
+
+  .page-title {
+    @apply text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-neutral-900;
+  }
+
+  .section-title {
+    @apply text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-neutral-900;
+  }
+
+  .body-text {
+    @apply text-base md:text-lg text-neutral-600 leading-relaxed;
+  }
+
+  .link-underline {
+    @apply relative inline-block;
+  }
+
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all duration-300;
+  }
+
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
 }

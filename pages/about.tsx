@@ -2,9 +2,7 @@ import React from "react";
 import { InferGetStaticPropsType } from "next";
 import Container from "../components/container/container";
 import Head from "next/head";
-import { CMS_NAME } from "../lib/constants";
 import SanityPageService from "../services/SanityPageService";
-import ImageWrapper from "../components/imageWrapper/imageWrapper";
 import BlockContentWrapper from "../components/blockContentWrapper/blockContentWrapper";
 import AboutPage from "../types/AboutPage";
 import Prose from "../components/prose/prose";
@@ -23,18 +21,29 @@ const About: React.FC<InferGetStaticPropsType<typeof getStaticProps>> = (
       <Head>
         <title>{data.title} | Strahl Capital</title>
       </Head>
-      <Container>
-        <div className="flex justify-center pt-5">
-          <div>
-            <div className="text-md md:text-5xl xl:text-6xl max-w-4xl text-center font-semibold">
+
+      {/* Hero Section */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-primary-50 via-white to-neutral-50" />
+        <Container className="relative">
+          <div className="py-16 md:py-24 lg:py-32 text-center">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900 tracking-tight max-w-4xl mx-auto">
               {data.title}
-            </div>
-            <Prose>
+            </h1>
+          </div>
+        </Container>
+      </section>
+
+      {/* Content Section */}
+      <section className="py-16 md:py-24 bg-white">
+        <Container>
+          <div className="max-w-3xl mx-auto">
+            <Prose large>
               <BlockContentWrapper text={data.body} />
             </Prose>
-            </div>
-        </div>
-      </Container>
+          </div>
+        </Container>
+      </section>
     </>
   );
 };

@@ -1,11 +1,27 @@
-import React from 'react'
+import React from "react";
 
 interface ContainerProps {
-  bleedMobile?: boolean
+  bleedMobile?: boolean;
+  children?: React.ReactNode;
+  className?: string;
 }
 
-const Container: React.FC<ContainerProps> = ({ children, bleedMobile=false }) => {
-  return <div className={`container w-full ${bleedMobile ? 'md:mx-auto md:px-5 lg:px-12' : 'mx-auto px-5 lg:px-12'}`}>{children}</div>
-}
+const Container: React.FC<ContainerProps> = ({
+  children,
+  bleedMobile = false,
+  className = "",
+}) => {
+  return (
+    <div
+      className={`
+        max-w-7xl w-full mx-auto
+        ${bleedMobile ? "md:px-8 lg:px-12" : "px-5 md:px-8 lg:px-12"}
+        ${className}
+      `}
+    >
+      {children}
+    </div>
+  );
+};
 
-export default Container
+export default Container;
